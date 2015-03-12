@@ -107,13 +107,14 @@ numFields = 4 		#fields in the text file| name, height, light, privacy
 f = open(db, 'r')
 entries = {}
 for line in f:
-	sLine = line.split(',',numFields)
+	sLine = line.split(',',numFields-1)
 	fields = []
-	for i in range(numFields):
-		if(i<numFields-1):
-			fields.append(int(sLine[i+1]))
-		else:
-			entries[sLine[0]] = fields
+	if(len(sLine)==numFields):
+		for i in range(numFields):
+			if(i<numFields-1):
+				fields.append(int(sLine[i+1]))
+			else:
+				entries[sLine[0]] = fields
 			
 lightRanges = [(3,7), (2,5), (0,4), (8,10)]
 heightRanges = [(1,9), (3,5), (6,8), (8,10)]
@@ -178,7 +179,7 @@ while(loop):
 		soFar += 1
 	elif(soFar == 4):
 		loop = False
-	elif(choice == 5)
+	elif(choice == 5):
 		loop = False
 	else:
 		print("Wrong input!")
