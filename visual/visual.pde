@@ -10,7 +10,7 @@ String siteLoc;
 
 void setup(){
  size(750,750);
- readFile("/Users/alisemsioglu/webstuff/AR-Basic-Placement/visual/data/sample_db");
+ readFile("YOURPATH/visual/data/sample_db");
  phase = 1;
  count = 0;
  areas = new String[4];
