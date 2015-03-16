@@ -13,6 +13,7 @@ class Square{
  boolean clicked;
  boolean selected;
  boolean initialized;
+ boolean invisible;
  
  PVector location; //location of the object on the screen
  
@@ -22,6 +23,7 @@ class Square{
    clicked = false;
    selected = false;
    initialized = false;
+   invisible = false;
    location = location_;
  }
  
@@ -68,26 +70,29 @@ class Square{
  }
  
  void display(){
-  stroke(200);
   
-  if(clicked){
-    fill(255,40,130,80);
-  }else if(selected){
-    fill(colrs[function-1],80);
-  }else{
-    noFill();
-  }
-  
-  if(mouseOver(mouseX,mouseY)){
-    fill(255,200,220,60);
-  }
-  
-  rectMode(CENTER);
-  rect(location.x,location.y,sizeX,sizeY);
-  
-  if(initialized){
-    fill(255);
-    text(dbIndex, location.x-sizeX/2,location.y);
+  if(!invisible){
+    stroke(200); 
+    
+    if(clicked){
+      fill(255,40,130,80);
+    }else if(selected){
+      fill(colrs[function-1],80);
+    }else{
+      noFill();
+    }
+    
+    if(mouseOver(mouseX,mouseY)){
+      fill(255,200,220,60);
+    }
+    
+    rectMode(CENTER);
+    rect(location.x,location.y,sizeX,sizeY);
+    
+    if(initialized){
+      fill(255);
+      text(dbIndex, location.x-sizeX/2,location.y);
+    }
   }
  }
   

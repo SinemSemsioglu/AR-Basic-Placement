@@ -19,23 +19,6 @@ class Space{
    float x_start;
    float y_start;
    
-   /*if(choice == 1){
-     w = 4;
-     h = 4;
-   }else if(choice == 2){
-     w = 8;
-     h = 2;
-   }
-   //initilazing the squares
-  
-   
-   if( w == h){
-     x_start = location.x - sizeX*3/2;
-     y_start = location.y - sizeY*3/2;
-   }else{
-     x_start = location.x - sizeX*7/2;
-     y_start = location.y - sizeY/2;
-   }*/
    
    w = 5;
    h = 7;
@@ -46,7 +29,7 @@ class Space{
    for(int i=0; i<w; i++){
      for(int j =0; j<h; j++){
       PVector loc = new PVector(x_start + i*sizeX, y_start + j*sizeY);
-      lot[i][j] = new Square(75,35,loc);
+      lot[i][j] = new Square(sizeX,sizeY,loc);
      }
    }
  }
@@ -54,6 +37,8 @@ class Space{
  void display(){
    shapeMode(CENTER);
    shape(site,location.x,location.y);
+   rotate(-PI/48);
+   translate(-30,10);
    for(int i=0; i<w; i++){
      for(int j =0; j<h; j++){
        lot[i][j].display();
@@ -65,8 +50,14 @@ class Space{
    for(int i=0; i<w; i++){
     for(int j=0; j<h; j++){
       if(lot[i][j].mouseOver(mX,mY) && !lot[i][j].selected){
-        Boolean temp = lot[i][j].clicked;
-        lot[i][j].clicked = !temp;
+        Boolean temp;
+        if(phase == 0){
+          temp = lot[i][j].invisible;
+          lot[i][j].invisible = !temp;
+        }else if(phase == 1){
+          temp = lot[i][j].clicked;
+          lot[i][j].clicked = !temp;
+        }
       }
      }
     }
@@ -80,6 +71,16 @@ class Space{
         lot[i][j].selected = true;
         lot[i][j].function = count;
         lot[i][j].initialize();
+      }
+     }
+    }
+  }
+  
+  void removeSqs(){
+    for(int i=0; i<w; i++){
+    for(int j=0; j<h; j++){
+      if(lot[i][j].invisible){
+        lot[i][j]=null;
       }
      }
     }
